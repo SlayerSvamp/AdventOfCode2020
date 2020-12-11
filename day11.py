@@ -42,6 +42,7 @@ class Chair:
         self.mod = 0
 
     @staticmethod
+    @timeit()
     def setup(line_of_sight):
         Chair.people_limit = 5 if line_of_sight else 4
 
@@ -62,7 +63,7 @@ class Chair:
                     neighbor.adjacent.add(chair)
 
     @staticmethod
-    @timeit
+    @timeit()
     def tick():
         change = True
         ticks = 0
@@ -118,25 +119,18 @@ for coords in grid:
     Chair(coords)
 
 
-@timeit
-def _part1():
-    Chair.setup(False)
-    ticks1 = Chair.tick()
-    part1 = Chair.count_occupied()
-    # Chair.print_grid()
-    print(f'Ticks 1: {ticks1}')
-    print(f'Part 1: {part1}')
+Chair.setup(False)
+ticks1 = Chair.tick()
+part1 = Chair.count_occupied()
+# Chair.print_grid()
+print(f'Ticks 1: {ticks1}')
+print(f'Part 1: {part1}')
 
-@timeit
-def _part2():
-    print()
-    Chair.reset()
-    Chair.setup(True)
-    ticks2 = Chair.tick()
-    part2 = Chair.count_occupied()
-    # Chair.print_grid()
-    print(f'Ticks 2: {ticks2}')
-    print(f'Part 2: {part2}')
-
-_part1()
-_part2()
+print()
+Chair.reset()
+Chair.setup(True)
+ticks2 = Chair.tick()
+part2 = Chair.count_occupied()
+# Chair.print_grid()
+print(f'Ticks 2: {ticks2}')
+print(f'Part 2: {part2}')
