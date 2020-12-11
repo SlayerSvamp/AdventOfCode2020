@@ -2,26 +2,17 @@ codes = open('data/day05.txt').read().splitlines()
 
 
 def seat(code):
-    col, row = 0, 0
-    x, y = 4, 64
+    ID = 0
     for c in code:
-        if c in 'BF':
-            if c == 'B':
-                row += y
-            y /= 2
-        else:
-            if c == 'R':
-                col += x
-            x /= 2
-    return int(row*8 + col)
+        ID <<= 1
+        ID += ~ord(c) >> 2 & 1  # 1 if c in 'BR' else 0
+    return ID
 
 
 *IDs, last = sorted([seat(code) for code in codes])
 current = IDs[0]
-
 while current in IDs:
     current += 1
-
 
 print(f'Part 1: {last}')
 print(f'Part 2: {current}')
