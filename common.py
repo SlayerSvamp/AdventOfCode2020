@@ -6,9 +6,9 @@ def timeit(display_name=None, /):
         _display_name = display_name or method.__name__
 
         def timed(*args, **kw):
-            ts = time.time()
+            ts = time.perf_counter()
             result = method(*args, **kw)
-            te = time.time()
+            te = time.perf_counter()
             if 'log_time' in kw:
                 name = kw.get('log_name', method.__name__.upper())
                 kw['log_time'][name] = int((te - ts) * 1000)
